@@ -1,4 +1,4 @@
-#https://tox.readthedocs.io/en/latest/ => convert to tox
+# https://tox.readthedocs.io/en/latest/ => convert to tox
 import setuptools
 
 with open("README.md", "r") as fh:
@@ -19,7 +19,7 @@ setuptools.setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
-    test_suite='nose.collector',
-    tests_require=['nose'],
+    python_requires=">=3.6",
+    test_suite="nose.collector",
+    tests_require=["nose"],
 )

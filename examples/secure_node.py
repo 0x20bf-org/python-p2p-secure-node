@@ -1,8 +1,9 @@
 import sys
 import time
 import getpass
-sys.path.insert(0, '..')
-sys.path.insert(0, '../../python-p2p-network')
+
+sys.path.insert(0, "..")
+sys.path.insert(0, "../../python-p2p-network")
 
 from p2psecure.securenode import SecureNode
 
@@ -18,8 +19,8 @@ information to one other.
 python secure_node.py <host> <port>
 python secure_node.py <port>
 """
-host     = "127.0.0.1"
-port     = 10000
+host = "127.0.0.1"
+port = 10000
 key_file = "secure_node.dat"
 
 if len(sys.argv) > 1:
@@ -37,26 +38,31 @@ try:
     with open(key_file, encoding="utf8") as f:
         key_file_exists = True
 
-except FileNotFoundError:  
+except FileNotFoundError:
     None
 
 except IOError:
     print("File " + key_file + " not accessible.")
     exit
 
-if ( key_file_exists ):
-    node.key_pair_load(key_file, getpass.getpass("What is your password to unlock the node:").encode('utf8'))
+if key_file_exists:
+    node.key_pair_load(
+        key_file,
+        getpass.getpass("What is your password to unlock the node:").encode("utf8"),
+    )
 else:
-    print("New node, generating a public/private identity, can take a couple of minutes...")
+    print(
+        "New node, generating a public/private identity, can take a couple of minutes..."
+    )
     node.key_pair_generate()
     password1 = getpass.getpass("Give password to lock your node securely:").strip()
     password2 = getpass.getpass("Retype your password:").strip()
-    if ( password1 == password2 ):
+    if password1 == password2:
         node.key_pair_save(key_file, password1)
         password1 = password2 = None
     else:
         print("Password do not match!")
-        exit 
+        exit
 
 node.start()
 node.debug = False
@@ -85,12 +91,12 @@ while running:
     elif s == "debug":
         node.debug = not node.debug
 
-    elif ( s == "connect"):
+    elif s == "connect":
         host = input("host: ")
         port = int(input("port: "))
         node.connect_with_node(host, port)
 
     else:
-        print("Command not understood '" + s + "'")   
+        print("Command not understood '" + s + "'")
 
 node.stop()

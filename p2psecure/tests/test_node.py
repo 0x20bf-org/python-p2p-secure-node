@@ -10,11 +10,13 @@ Version: 0.1 beta
 Testing the basic functionality of the SecureNode class.
 """
 
+
 class TestNode(unittest.TestCase):
     """Testing the SecureNode class."""
 
     def test_secure_node(self):
         """TODO: ???."""
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
